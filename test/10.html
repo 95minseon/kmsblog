@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script>
+  var a = [1,2,5,153,63,3,13,56,67,4,21]
+  var temp=0
+  var min_num =0
+  for(var j=0; j<a.length; j++){
+      min_num = j
+      for(var i=j; i<a.length; i++){
+          if( a[min_num] < a[i+1]){
+              min_num = i+1
+          }
+      }
+      temp = a[min_num]
+      a[min_num]=a[j]
+      a[j]=temp
+  }
+  alert(a)
+
+</script>
+
+
+
+</head>
+<body>
+    
+</body>
+</html>
