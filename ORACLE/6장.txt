@@ -1,0 +1,388 @@
+--5.1 EMP 테이블의 모든 열 출력하기
+SELECT *
+FROM EMP;
+
+--5.2 부서 번호가 30인 데이터만 출력하기
+SELECT *
+FROM EMP
+WHERE DEPTNO = 30;
+
+--5.3 AND 연산자로 여러 개의 조건식 사용하기
+SELECT *
+FROM EMP
+WHERE DEPTNO = 30
+ AND JOB = 'SALESMAN';
+ 
+ --5.4 OR연산자로 여러 개의 출력 조건 사용하기
+ SELECT *
+ FROM EMP
+ WHERE DEPTNO =30
+  OR JOB= 'CLERK';
+  
+--5.5 곱셈 산술 연산자를 사용한 예
+ SELECT *
+ FROM EMP
+ WHERE SAL * 12 = 36000;
+ 
+ --5.6대소 비교연산자를 사용하여 출력하기
+ SELECT *
+ FROM EMP
+ WHERE SAL >= 3000;
+ 
+ --5.7문자를 대소 비교 연산자로 비교하기(비교문자열이 하나일때)
+ SELECT *
+ FROM EMP
+ WHERE ENAME >='F';
+ 
+ --5.8문자열을 대소 비교 연산자로 비교하기(비교 문자열이 문자 여러개일 때)
+ SELECT *
+ FROM EMP
+ WHERE ENAME <='FORZ';
+ 
+ --5.9등가 비교 연산자(!=)를 사용하려 출력하기
+ SELECT *
+ FROM EMP
+ WHERE SAL !=3000;
+  
+ --5.10등가 비교 연산자(<>)를 사용하려 출력하기
+  SELECT *
+ FROM EMP
+ WHERE SAL <>3000;
+ 
+ --5.11등가 비교 연산자(^=)를 사용하려 출력하기
+  SELECT *
+ FROM EMP
+ WHERE SAL ^=3000;
+ 
+ --5.12 NOT 연산자를 사용하여 출력하기
+ SELECT *
+ FROM EMP
+ WHERE NOT SAL =3000;
+ 
+ --5.13 OR연산자를 사용하여 여러 개 조건을 만족하는 데이터 출력하기
+ SELECT *
+  FROM EMP
+WHERE JOB = 'MANAGER'
+   OR JOB = 'SALESMAN'
+   OR JOB = 'CLERK';
+   
+--5.14 IN연산자를 사용하여 출력하기
+SELECT *
+FROM EMP
+WHERE JOB IN('MANAGER','SALESMAN','CLERK');
+
+--5.15 등가비교 연산자와 AND 연산자를 사용하여 출력하기
+SELECT *
+FROM EMP
+WHERE JOB !='MANAGER'
+   AND JOB <> 'SALESMAN'
+   AND JOB ^= 'CLERK';
+   
+--5.16 IN연산자와 논리 부정 연산자를 사용하여 출력하기
+SELECT *
+FROM EMP
+WHERE JOB NOT IN('MANAGER', 'SALESMAN', 'CLERK');
+
+--5.17  대소 비교 연산자와 AND 연산자를 사용하여 출력하기
+SELECT *
+FROM EMP
+WHERE SAL >= 2000
+  AND SAL <= 3000;
+  
+--5.18  BETWEEN A AND B 연산자를 사용하여 출력하기
+SELECT *
+FROM EMP
+WHERE SAL BETWEEN 2000 AND 3000;
+
+--5.19 BETWEEN A AND B 연산자와 NOT연산자를 사용하여 출력하기
+SELECT *
+FROM EMP
+WHERE SAL NOT BETWEEN 2000 AND 3000;
+
+--5.20 LIKE 연산자 이용하여 출력하기
+SELECT *
+FROM EMP
+WHERE ENAME LIKE 'S%';
+
+--5.21사원 이름의 두번대 글자가 L인 사원만 출력
+SELECT *
+FROM EMP
+WHERE ENAME LIKE '_L%';
+
+--5.22 사원 이름에 AM이 포함되어 있는  데이터만 출력하기
+SELECT *
+FROM EMP
+WHERE ENAME LIKE '%AM%';
+
+--5.23 사원 이름에 AM이 포함되어 있지 않는 데이터만 출력하기
+SELECT *
+FROM EMP
+WHERE ENAME NOT LIKE '%AM%';
+
+--5.24 별칭을 사용하여 열 이름 출력하기
+SELECT ENAME, SAL, SAL*12+COMM AS ANNSAL, COMM
+FROM EMP;
+
+--5.25 등가 비교 연산자로 NULL 비교하기
+SELECT *
+FROM EMP
+WHERE COMM = NULL;
+
+--5.26 IS NULL 연산자를 사용하여 출력하기
+SELECT *
+FROM EMP
+WHERE COMM IS NULL;
+
+--5.27 직속 상관이 있는 사원 데이터만 출력하기
+SELECT *
+FROM EMP
+WHERE MGR IS NOT NULL;
+
+--5.28 AND 연산자와 IS NULL연산자 사용하기
+SELECT *
+FROM EMP
+WHERE SAL > NULL
+    AND COMM IS NULL;
+    
+--5.29 OR 연산자와 IS NULL 연산자 사용하기
+SELECT *
+FROM EMP
+WHERE SAL > NULL
+    OR COMM IS NULL;
+
+--5.30 집합연산자(UNION)를 사용하여 출력하기
+SELECT EMPNO, ENAME, SAL, DEPTNO
+FROM EMP
+WHERE DEPTNO =10
+UNION
+SELECT EMPNO, ENAME, SAL, DEPTNO
+FROM EMP
+WHERE DEPTNO =20;
+
+--5.31 집합연산자(UNION)를 사용하여 출력하기(출력 열 개수가 다를 때)
+SELECT EMPNO, ENAME, SAL, DEPTNO
+FROM EMP
+WHERE DEPTNO =10
+UNION
+SELECT EMPNO, ENAME, SAL
+FROM EMP
+WHERE DEPTNO =20;
+
+
+--5.32 집합연산자(UNION)를 사용하여 출력하기(출력 열의 자료형이 다를 때)
+SELECT EMPNO, ENAME, SAL, DEPTNO
+FROM EMP
+WHERE DEPTNO =10
+UNION
+SELECT  ENAME,EMPNO, DEPTNO, SAL
+FROM EMP
+WHERE DEPTNO =20;
+
+--5.33 집합연산자(UNION)를 사용하여 출력하기(출력 열 개수와 자료형이 같을 때)
+SELECT EMPNO, ENAME, SAL, DEPTNO
+FROM EMP
+WHERE DEPTNO =10
+UNION
+SELECT  SAL, JOB, DEPTNO, SAL
+FROM EMP
+WHERE DEPTNO =20;
+
+
+--5.34 집합연산자(UNION)를 사용하여 출력하기(출력 결과 데이터가 같을 때)
+SELECT EMPNO, ENAME, SAL, DEPTNO
+FROM EMP
+WHERE DEPTNO =10
+UNION
+SELECT EMPNO, ENAME, SAL, DEPTNO
+FROM EMP
+WHERE DEPTNO =10;
+
+--5.35 집합연산자(UNION ALL)를 사용하여 출력하기(출력 결과 데이터가 같을 때)
+SELECT EMPNO, ENAME, SAL, DEPTNO
+FROM EMP
+WHERE DEPTNO =10
+UNION ALL
+SELECT EMPNO, ENAME, SAL, DEPTNO
+FROM EMP
+WHERE DEPTNO =10;
+
+
+--5.36 집합연산자(MINUS)를 사용하여 출력하기
+SELECT EMPNO, ENAME, SAL, DEPTNO
+FROM EMP
+MINUS
+SELECT EMPNO, ENAME, SAL, DEPTNO
+FROM EMP
+WHERE DEPTNO =10;
+
+--5.37 집합 연산자(INSERSECT)를 사용하여 출력하기
+SELECT EMPNO, ENAME, SAL, DEPTNO
+FROM EMP
+INTERSECT
+SELECT EMPNO, ENAME, SAL, DEPTNO
+FROM EMP
+WHERE DEPTNO = 10;
+
+--Q1
+SELECT *
+FROM EMP
+WHERE ENAME LIKE  '%S';
+
+--Q2
+SELECT EMPNO, ENAME, JOB, SAL, DEPTNO
+FROM EMP
+WHERE DEPTNO=30 AND JOB='SALESMAN'; 
+
+--Q3.1
+SELECT EMPNO, ENAME, JOB, SAL, DEPTNO
+FROM EMP
+WHERE DEPTNO IN(20,30) AND SAL >2000;
+--Q3.2
+SELECT EMPNO, ENAME,  JOB, SAL, DEPTNO 
+FROM EMP
+WHERE DEPTNO= 20 AND SAL >2000
+UNION
+SELECT EMPNO, ENAME,  JOB, SAL, DEPTNO 
+FROM EMP
+WHERE DEPTNO= 30 AND SAL >2000;
+
+--Q4
+SELECT *
+  FROM EMP
+MINUS
+SELECT *
+ FROM EMP
+  WHERE SAL>=2000 AND SAL <=3000;
+--Q5
+SELECT *
+FROM EMP
+WHERE ENAME LIKE '%E%'  
+AND NOT(SAL>=1000 AND SAL<=2000) AND DEPTNO=30;
+
+--Q6
+SELECT *
+FROM EMP
+WHERE NOT COMM 
+;
+
+--6.1 UPPER, LOWER, INITCAP
+SELECT ENAME, UPPER(ENAME), LOWER(ENAME), INITCAP(ENAME)
+FROM EMP;
+--6.2 UPPER 함수로 문자열 비교하기(사원 이름니 SCOTT인 데이터 찾기
+SELECT *
+FROM EMP
+WHERE UPPER(ENAME) = UPPER('scott');
+--6.3 UPPER 함수로 문자열 비교하기(사원 이름에 SCOTT단어 포함 데이터 찾기
+SELECT *
+FROM EMP
+WHERE UPPER(ENAME) LIKE UPPER('%scott%');
+--6.4
+SELECT ENAME, LENGTH(ENAME)
+FROM EMP;
+--6.5
+SELECT ENAME, LENGTH(ENAME)
+FROM EMP
+WHERE LENGTH(ENAME)>=5;
+--6.6
+SELECT LENGTH('한글'),LENGTHB('한글')
+FROM DUAL;
+--6.7
+SELECT JOB, SUBSTR(JOB,1,2), SUBSTR(JOB,3,2), SUBSTR(JOB,5)
+FROM EMP;
+--6.8
+SELECT JOB,
+  SUBSTR(JOB, -LENGTH(JOB)),
+  SUBSTR(JOB, -LENGTH(JOB),2),
+  SUBSTR(JOB, -3)
+FROM EMP;
+--6.9
+SELECT INSTR('HELLO, ORACLE!', 'L')AS INSTR_1,
+       INSTR('HELLO, ORACLE!', 'L',5)AS INSTR_2,
+       INSTR('HELLO, ORACLE!', 'L',2,2)AS INSTR_3
+FROM DUAL;
+--6.10
+SELECT *
+FROM EMP
+WHERE INSTR(ENAME, 'S')>0;
+--6.11
+SELECT *
+FROM EMP
+WHERE ENAME LIKE '%S%' ;
+
+--6.12
+SELECT '010-1234-5678' AS REPLACE_BEFORE,
+      REPLACE('010-1234-5678', '-', '')AS REPLACE_1,
+      REPLACE('010-1234-5678', '-')AS REPLACE_2
+FROM DUAL;
+
+--6.13
+SELECT 'Oracle',
+      LPAD('Oracle',10, '#')AS LPAD_1,
+      RPAD('Oracle',10, '*')AS LPAD_2,
+      LPAD('Oracle',10)AS LPAD_1,
+      RPAD('Oracle',10)AS LPAD_2
+FROM DUAL;
+
+--6.14
+SELECT
+     RPAD('971225-', 14, '*')AS RPAD_JMNO,
+     RPAD('010-1234-5678', 13, '*')AS RPAD_PHONE
+FROM DUAL;
+
+--6.15
+SELECT CONCAT(EMPNO, ENAME),
+       CONCAT(EMPNO, CONCAT(':',ENAME))
+       FROM EMP
+WHERE ENAME = 'SCOTT';
+
+--6.16
+SELECT '[' || TRIM(' _ _Oracle_ _') || ']' AS TRIM,
+       '[' || TRIM(LEADING FROM ' _ _Oracle_ _') || ']' AS TRIM_LEADING,
+       '[' || TRIM(TRAILING FROM ' _ _Oracle_ _') || ']' AS TRIM_TRILING,
+       '[' || TRIM(BOTH FROM ' _ _Oracle_ _') || ']' AS TRIM_BOTH
+    FROM DUAL;
+    
+  --6.17
+  SELECT '[' || TRIM('_' FROM '_ _Oracle_ _') || ']' AS TRIM,
+         '[' || TRIM(LEADING '_' FROM '_ _Oracle_ _') || ']' AS TRIM_LEADING,
+         '[' || TRIM(BOTH '_' FROM '_ _Oracle_ _') || ']' AS TRIM_BOTH
+    FROM DUAL;
+--6.18
+SELECT '['|| TRIM(' _Oracle_ ') || ']' AS TRIM,
+       '['|| LTRIM(' _Oracle_ ') || ']' AS LTRIM,
+       '['|| LTRIM(' _Oracle_ ', '_<') ||']' AS LTRIM_2,
+       '['|| RTRIM(' _Oracle_ ') || ']' AS RTRIM,
+       '['|| RTRIM(' _Oracle_ ', '>_') ||']' AS RTRIM_2
+FROM DUAL;
+
+--6.19
+SELECT ROUND(1234.5678) AS ROUND,
+       ROUND(1234.5678,0) AS ROUND_0,
+       ROUND(1234.5678,1) AS ROUND_1,
+       ROUND(1234.5678,2) AS ROUND_2,
+       ROUND(1234.5678,-1) AS ROUND_MINUS1,
+       ROUND(1234.5678, -2) AS ROUND_MINUS2
+  FROM DUAL;
+  
+--6.20
+SELECT TRUNC(1234.5678) AS TRUNC,
+       TRUNC(1234.5678,0) AS TRUNC_0,
+       TRUNC(1234.5678,1) AS TRUNC_1,
+       TRUNC(1234.5678,2) AS TRUNC_2,
+       TRUNC(1234.5678,-1) AS TRUNC_MINUS1,
+       TRUNC(1234.5678,-2) AS TRUNC_MINUS2
+  FROM DUAL;
+  
+--6.21
+SELECT CEIL(3.14),
+       FLOOR(3.14),
+       CEIL(-3.14),
+       FLOOR(-3.14)
+FROM DUAL;
+
+--6.22
+SELECT MOD(15,6),
+       MOD(10,2),
+       MOD(11,2),
+       MOD(11,2)
+    FROM DUAL;
